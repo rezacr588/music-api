@@ -1,5 +1,10 @@
 const express = require("express");
 const config = require("config");
+const mongoose = require("mongoose");
+mongoose.connect(
+  config.Music.dbConfig.connection,
+  config.Music.dbConfig.options,
+);
 const app = express();
 
 app.get("/", (req, res) => {
@@ -7,5 +12,5 @@ app.get("/", (req, res) => {
 });
 
 app.listen(config.Music.server.port, () => {
-  console.log(`Music API is listening`);
+  console.log(`Music API is running`);
 });
