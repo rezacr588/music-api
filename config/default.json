@@ -1,0 +1,14 @@
+{
+  // Customer module configs
+  "Music": {
+    "dbConfig": {
+      "host": "localhost",
+      "port": 27017,
+      "dbName": "music-api"
+    },
+    "credit": {
+      "initialLimit": 100,
+      "initialDays": 1
+    }
+  }
+}
