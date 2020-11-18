@@ -1,7 +1,11 @@
 {
   "Music": {
     "dbConfig": {
-      "host": "prod-db-server"
+      "connection": "mongodb+srv://rezacr588:<password>@music-api.q7mau.mongodb.net/<dbname>?retryWrites=true&w=majority"
+    },
+    "server": {
+      "host": "localhost",
+      "port": "3000"
     },
     "credit": {
       "initialDays": 30
