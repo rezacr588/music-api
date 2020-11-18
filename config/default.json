@@ -1,5 +1,4 @@
 {
-  // Customer module configs
   "Music": {
     "dbConfig": {
       "host": "localhost",
