@@ -1,25 +1,33 @@
 {
   "name": "music-api",
   "version": "1.0.0",
-  "description": "api for all apps",
+  "description": "api for music apps",
   "main": "index.js",
   "scripts": {
-    "start": "NODE_ENV=production node index.js",
-    "test": "NODE_ENV=development nodemon index.js"
+    "start": "set NODE_ENV=production node index.js",
+    "test": "nodemon ./index.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rezacr588/music-api.git"
   },
-  "author": "",
+  "author": "rezacr588",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/rezacr588/music-api/issues"
   },
   "homepage": "https://github.com/rezacr588/music-api#readme",
   "dependencies": {
+    "body-parser": "^1.19.0",
     "config": "^3.3.2",
     "express": "^4.17.1",
-    "mongoose": "^5.10.15"
+    "joi": "^17.3.0",
+    "joi-objectid": "^3.0.1",
+    "lodash": "^4.17.20",
+    "mongoose": "^5.10.15",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "jshint": "^2.12.0"
   }
 }

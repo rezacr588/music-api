@@ -1,15 +1,15 @@
 {
-  "Music": {
-    "dbConfig": {
-      "connection": "mongodb://localhost/music-api",
-      "options": {
-        "useNewUrlParser": true,
-        "useUnifiedTopology": true
-      }
-    },
-    "server": {
-      "host": "localhost",
-      "port": "3000"
+  "dbConfig": {
+    "connection": "mongodb://localhost/music-api",
+    "options": {
+      "useNewUrlParser": true,
+      "useUnifiedTopology": true,
+      "useCreateIndex": true,
+      "useFindAndModify": false
     }
+  },
+  "serverConfig": {
+    "host": "localhost",
+    "port": "3000"
   }
 }
