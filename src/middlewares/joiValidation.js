@@ -26,3 +26,7 @@ exports.deleteSchema = Joi.object({
     then: Joi.objectId().required(),
   }),
 });
+exports.loginSchema = Joi.object({
+  email: Joi.string().min(3).required(),
+  password: Joi.string().required(),
+});

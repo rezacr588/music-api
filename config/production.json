@@ -1,6 +1,6 @@
 {
   "dbConfig": {
-    "connection": "mongodb+srv://rezacr588:1940531071Rr@music-api.q7mau.mongodb.net/<dbname>?retryWrites=true&w=majority"
+    "connection": "mongodb+srv://rezacr588:1940531071Rr@music-api.q7mau.mongodb.net/musicapi?retryWrites=true&w=majority"
   },
   "server": {
     "host": "localhost",

@@ -1,4 +1,5 @@
 {
+  "jwtSecretKey": "",
   "dbConfig": {
     "connection": "mongodb://localhost/music-api",
     "options": {
