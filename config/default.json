@@ -1,7 +1,6 @@
 {
   "jwtSecretKey": "",
   "dbConfig": {
-    "connection": "mongodb://localhost/music-api",
     "options": {
       "useNewUrlParser": true,
       "useUnifiedTopology": true,

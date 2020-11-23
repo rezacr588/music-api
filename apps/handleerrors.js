@@ -1,4 +1,5 @@
 module.exports = function () {
+  require("dotenv").config();
   require("express-async-errors");
   process.on("uncaughtException", (ex) => {
     console.error(ex);
