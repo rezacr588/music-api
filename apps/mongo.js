@@ -5,5 +5,8 @@ module.exports = function (config) {
     .connect(config.dbConfig.connection, config.dbConfig.options)
     .then(() => {
       console.log("db is connected");
+    })
+    .catch((err) => {
+      console.log(err);
     });
 };

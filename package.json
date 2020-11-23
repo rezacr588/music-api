@@ -4,7 +4,7 @@
   "description": "api for music apps",
   "main": "index.js",
   "scripts": {
-    "start": "node ./index.js"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
