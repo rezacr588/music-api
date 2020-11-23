@@ -30,3 +30,7 @@ exports.loginSchema = Joi.object({
   email: Joi.string().min(3).required(),
   password: Joi.string().required(),
 });
+exports.userRoleSchema = Joi.object({
+  role: Joi.objectId().required(),
+  user: Joi.objectId().required(),
+});

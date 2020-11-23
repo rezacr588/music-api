@@ -18,6 +18,14 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+  role: {
+    type: new Schema({
+      code: {
+        type: Number,
+        required: true,
+      },
+    }),
+  },
 });
 userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next();
@@ -33,6 +41,7 @@ userSchema.methods.generateAuthToken = function () {
   const token = jwt.sign(
     {
       _id: this._id,
+      code: this.role.code,
     },
     config.get("jwtSecretKey"),
   );
@@ -46,4 +55,5 @@ exports.joiSchema = Joi.object({
   email: Joi.string().email().required(),
   password: Joi.string().required(),
   confirmPassword: Joi.any().valid(Joi.ref("password")).required(),
+  role: Joi.objectId(),
 });
