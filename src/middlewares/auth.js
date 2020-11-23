@@ -10,3 +10,12 @@ exports.protect = function (req, res, next) {
   req.user = decoded;
   next();
 };
+exports.authorize = (code) => {
+  return async (req, res, next) => {
+    if (req.user.code == code) {
+      next();
+    } else {
+      throw new Error("you are not authorize");
+    }
+  };
+};

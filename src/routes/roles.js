@@ -1,5 +1,7 @@
 const express = require("express");
 const { validation, deleteSchema } = require("../middlewares/joiValidation");
+const { protect, authorize } = require("../middlewares/auth");
+
 const { joiSchema } = require("../models/role");
 const {
   create,
@@ -11,7 +13,7 @@ const router = express.Router();
 router
   .route("/")
   .get(index)
-  .post(validation(joiSchema), create)
+  .post(protect, authorize(10), validation(joiSchema), create)
   .patch(validation(joiSchema), patch)
   .delete(validation(deleteSchema), handleDelete);
 module.exports = router;
