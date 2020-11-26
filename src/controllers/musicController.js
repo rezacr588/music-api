@@ -17,11 +17,13 @@ exports.create = async (req, res) => {
   });
   if (artists.length == 0) return res.send("artists not found");
   filteredBody.artists = artists;
+  filteredBody.userId = req.user._id;
   const genres = await Genre.find({
     _id: { $in: filteredBody.genres },
   });
   if (genres.length == 0) return res.send("genres not found");
   filteredBody.genres = genres;
+  filteredBody.userId = req.user._id;
   const music = await Music.create(filteredBody);
   res.json(music);
 };
@@ -50,6 +52,7 @@ exports.patch = async (req, res) => {
     if (genres.length == 0) return res.send("genres not found");
     filteredBody.genres = genres;
   }
+  filteredBody.userId = req.user._id;
   const music = await Music.findByIdAndUpdate(req.body._id, filteredBody, {
     new: true,
   });

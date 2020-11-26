@@ -4,7 +4,8 @@
   "description": "api for music apps",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -28,7 +29,8 @@
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.20",
     "mongoose": "^5.10.15",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "poshtiban": "^0.9.4"
   },
   "devDependencies": {
     "jshint": "^2.12.0"

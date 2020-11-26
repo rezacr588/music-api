@@ -2,12 +2,14 @@ const _ = require("lodash");
 const { Artist } = require("../models/artist");
 exports.create = async (req, res) => {
   const filteredBody = _.pick(req.body, ["title", "cover"]);
+  filteredBody.userId = req.user._id;
   const artist = await Artist.create(filteredBody);
   res.json(artist);
 };
 exports.patch = async (req, res) => {
   if (!req.body._id) return res.send("_id not exist");
   const filteredBody = _.pick(req.body, ["title", "cover"]);
+  filteredBody.userId = req.user._id;
   const artist = await Artist.findByIdAndUpdate(req.body._id, filteredBody, {
     new: true,
   });
