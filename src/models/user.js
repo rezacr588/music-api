@@ -38,13 +38,21 @@ userSchema.methods.comparePassword = async function (candidatePassword) {
   return isMatch;
 };
 userSchema.methods.generateAuthToken = function () {
-  const token = jwt.sign(
+  let code;
+  if (this.role) {
+    code = this.role.code;
+  } else {
+    code = 0;
+  }
+  token = jwt.sign(
     {
       _id: this._id,
-      code: this.role.code || 0,
+      name: this.name,
+      code,
     },
     config.get("jwtSecretKey"),
   );
+
   return token;
 };
 exports.Schema = userSchema;
