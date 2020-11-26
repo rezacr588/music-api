@@ -9,10 +9,11 @@ const {
   handleDelete,
 } = require("../controllers/roleController");
 const router = express.Router();
+router.use(protect, authorize(10));
 router
   .route("/")
   .get(index)
-  .post(protect, validation(joiSchema), create)
-  .patch(protect, validation(joiSchema), patch)
-  .delete(protect, validation(deleteSchema), handleDelete);
+  .post(validation(joiSchema), create)
+  .patch(validation(joiSchema), patch)
+  .delete(validation(deleteSchema), handleDelete);
 module.exports = router;

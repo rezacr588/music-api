@@ -3,8 +3,11 @@ const {
   validation,
   userRoleSchema,
 } = require("../../middlewares/joiValidation");
-const { protect } = require("../../middlewares/auth");
+const { protect, authorize } = require("../../middlewares/auth");
 const { setRoleForUser } = require("../../controllers/userRoleController");
 const router = express.Router();
-router.route("/").post(protect, validation(userRoleSchema), setRoleForUser);
+router.use(protect, authorize(10));
+router
+  .route("/")
+  .post(protect, authorize(10), validation(userRoleSchema), setRoleForUser);
 module.exports = router;
