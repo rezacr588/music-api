@@ -41,7 +41,7 @@ userSchema.methods.generateAuthToken = function () {
   const token = jwt.sign(
     {
       _id: this._id,
-      code: this.role.code,
+      code: this.role.code || 0,
     },
     config.get("jwtSecretKey"),
   );
