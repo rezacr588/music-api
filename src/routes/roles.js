@@ -12,7 +12,7 @@ const router = express.Router();
 router
   .route("/")
   .get(index)
-  .post(protect, authorize(10), validation(joiSchema), create)
+  .post(protect, validation(joiSchema), create)
   .patch(protect, validation(joiSchema), patch)
   .delete(protect, validation(deleteSchema), handleDelete);
 module.exports = router;
