@@ -59,7 +59,10 @@ exports.patch = async (req, res) => {
   res.json(music);
 };
 exports.index = async (req, res) => {
-  const musics = await Music.find().sort("-updatedAt");
+  let { limit, page } = req.query;
+  limit = req.query.limit || 10;
+  let skip = page ? (page - 1) * limit : 0;
+  const musics = await Music.find().limit(limit).skip(skip).sort("-updatedAt");
   res.json(musics);
 };
 exports.handleDelete = async (req, res) => {

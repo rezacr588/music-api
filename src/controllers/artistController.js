@@ -16,7 +16,13 @@ exports.patch = async (req, res) => {
   res.json(artist);
 };
 exports.index = async (req, res) => {
-  const artists = await Artist.find().sort("-updatedAt");
+  let { limit, page } = req.query;
+  limit = req.query.limit || 10;
+  let skip = page ? (page - 1) * limit : 0;
+  const artists = await Artist.find()
+    .limit(limit)
+    .skip(skip)
+    .sort("-updatedAt");
   res.json(artists);
 };
 exports.handleDelete = async (req, res) => {
