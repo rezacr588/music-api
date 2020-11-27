@@ -3,30 +3,33 @@ const bcrypt = require("bcrypt");
 const Joi = require("joi");
 const jwt = require("jsonwebtoken");
 const config = require("config");
-const userSchema = new Schema({
-  name: {
-    type: String,
-    required: true,
-    unique: true,
+const userSchema = new Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
+    role: {
+      type: new Schema({
+        code: {
+          type: Number,
+          required: true,
+        },
+      }),
+    },
   },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  password: {
-    type: String,
-    required: true,
-  },
-  role: {
-    type: new Schema({
-      code: {
-        type: Number,
-        required: true,
-      },
-    }),
-  },
-});
+  { timestamps: true },
+);
 userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next();
   const salt = await bcrypt.genSalt(10);

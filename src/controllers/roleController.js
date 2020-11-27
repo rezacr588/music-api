@@ -16,10 +16,10 @@ exports.patch = async (req, res) => {
   res.json(role);
 };
 exports.index = async (req, res) => {
-  let { limit, page } = req.query;
-  limit = req.query.limit || 10;
-  let skip = page ? (page - 1) * limit : 0;
-  const roles = await Role.find().limit(limit).skip(skip).sort("-updatedAt");
+  const roles = await Role.find()
+    .limit(req.limit)
+    .skip(req.skip)
+    .sort("-updatedAt");
   res.json(roles);
 };
 exports.handleDelete = async (req, res) => {

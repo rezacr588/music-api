@@ -18,3 +18,11 @@ exports.login = async (req, res) => {
   const token = user.generateAuthToken();
   res.header("x-auth-token", token).json(_.pick(user, ["name", "email"]));
 };
+
+exports.index = async (req, res) => {
+  const users = await User.find()
+    .limit(req.limit)
+    .skip(req.skip)
+    .sort("-role.code");
+  res.json(users);
+};

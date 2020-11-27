@@ -1,5 +1,6 @@
 const express = require("express");
 const { validation, deleteSchema } = require("../middlewares/joiValidation");
+const paginate = require("../middlewares/paginate");
 const { protect, authorize } = require("../middlewares/auth");
 const { joiSchema } = require("../models/role");
 const {
@@ -12,7 +13,7 @@ const router = express.Router();
 router.use(protect, authorize(10));
 router
   .route("/")
-  .get(index)
+  .get(paginate, index)
   .post(validation(joiSchema), create)
   .patch(validation(joiSchema), patch)
   .delete(validation(deleteSchema), handleDelete);
