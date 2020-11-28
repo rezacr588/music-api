@@ -16,6 +16,7 @@ exports.s3Upload = multer({
       cb(null, { fieldName: file.fieldname });
     },
     acl: "public-read",
+    contentType: multerS3.AUTO_CONTENT_TYPE,
     key: function (req, file, cb) {
       cb(null, `${Date.now().toString()}${file.originalname}`);
     },
