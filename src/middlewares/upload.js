@@ -17,7 +17,8 @@ module.exports = multer({
     },
     acl: "public-read",
     key: function (req, file, cb) {
-      cb(null, Date.now().toString());
+      req.body.cover = req.file.location;
+      cb(null, `${Date.now().toString()}${file.originalname}`);
     },
   }),
 });
