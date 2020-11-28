@@ -23,4 +23,5 @@ exports.s3Upload = multer({
 });
 exports.setUrl = (fieldName) => (req, res, next) => {
   req.body[fieldName] = req.file.location;
+  next();
 };
