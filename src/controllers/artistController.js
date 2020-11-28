@@ -1,7 +1,8 @@
 const _ = require("lodash");
 const { Artist } = require("../models/artist");
 exports.create = async (req, res) => {
-  const filteredBody = _.pick(req.body, ["title", "cover"]);
+  const filteredBody = _.pick(req.body, ["title"]);
+  filteredBody.cover = req.file.location;
   filteredBody.userId = req.user._id;
   const artist = await Artist.create(filteredBody);
   res.json(artist);
