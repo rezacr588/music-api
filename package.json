@@ -31,6 +31,8 @@
     "lodash": "^4.17.20",
     "mongoose": "^5.10.15",
     "morgan": "^1.10.0",
+    "multer": "^1.4.2",
+    "multer-s3": "^2.9.0",
     "poshtiban": "^0.9.4"
   },
   "devDependencies": {
