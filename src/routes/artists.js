@@ -1,7 +1,7 @@
 const express = require("express");
 const { validation, deleteSchema } = require("../middlewares/joiValidation");
 const paginate = require("../middlewares/paginate");
-const upload = require("../middlewares/upload");
+const { setUrl, s3Upload } = require("../middlewares/upload");
 const { joiSchema } = require("../models/artist");
 const {
   create,
@@ -14,7 +14,14 @@ const router = express.Router();
 router
   .route("/")
   .get(paginate, index)
-  .post(protect, authorize(10), upload.single('cover'), validation(joiSchema), create)
+  .post(
+    protect,
+    authorize(10),
+    s3Upload.single("cover"),
+    setUrl("cover"),
+    validation(joiSchema),
+    create,
+  )
   .patch(protect, authorize(10), validation(joiSchema), patch)
   .delete(protect, authorize(10), validation(deleteSchema), handleDelete);
 module.exports = router;

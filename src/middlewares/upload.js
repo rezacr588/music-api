@@ -8,7 +8,7 @@ const s3 = new aws.S3({
   endpoint: "https://s3.ir-thr-at1.arvanstorage.com",
   s3ForcePathStyle: true,
 });
-module.exports = multer({
+exports.s3Upload = multer({
   storage: multerS3({
     s3: s3,
     bucket: "musics",
@@ -21,3 +21,6 @@ module.exports = multer({
     },
   }),
 });
+exports.setUrl = (fieldName) => (req, res, next) => {
+  req.body[fieldName] = req.file.location;
+};
