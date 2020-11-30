@@ -1,6 +1,7 @@
 const aws = require("aws-sdk");
 const multer = require("multer");
 const multerS3 = require("multer-s3");
+const request = require("request");
 const s3 = new aws.S3({
   accessKeyId: "fc3e37e2-0f10-418e-a7e5-9f86e2a99730",
   secretAccessKey:
@@ -24,5 +25,42 @@ exports.s3Upload = multer({
 });
 exports.setUrl = (fieldName) => (req, res, next) => {
   req.body[fieldName] = req.file.location;
+  next();
+};
+exports.musicUplaod = (req, res, next) => {
+  if (req.body.highQuality)
+    request.get(url).on("response", function (response) {
+      if (200 == response.statusCode) {
+        s3.upload(
+          {
+            Body: response,
+            Bucket: "musics",
+            ACL: "public-read",
+            CacheControl: "5184000",
+            Key: `${Date.now().toString()}.mp3`,
+          },
+          function (err, data) {
+            req.body.highQuality = data.Location;
+          },
+        );
+      }
+    });
+  if (req.body.mediumQuality)
+    request.get(url).on("response", function (response) {
+      if (200 == response.statusCode) {
+        s3.upload(
+          {
+            Body: response,
+            Bucket: "musics",
+            ACL: "public-read",
+            CacheControl: "5184000",
+            Key: `${Date.now().toString()}.mp3`,
+          },
+          function (err, data) {
+            req.body.mediumQuality = data.Location;
+          },
+        );
+      }
+    });
   next();
 };

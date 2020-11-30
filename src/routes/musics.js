@@ -1,7 +1,7 @@
 const express = require("express");
 const { validation, deleteSchema } = require("../middlewares/joiValidation");
 const { protect, authorize } = require("../middlewares/auth");
-const { setUrl, s3Upload } = require("../middlewares/upload");
+const { setUrl, s3Upload, musicUplaod } = require("../middlewares/upload");
 const paginate = require("../middlewares/paginate");
 const { joiSchema } = require("../models/music");
 const {
@@ -17,6 +17,7 @@ router
   .post(
     protect,
     authorize(10),
+    musicUplaod,
     s3Upload.single("cover"),
     setUrl("cover"),
     validation(joiSchema),
