@@ -53,11 +53,32 @@ const musicSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "User",
       required: true,
-
     },
   },
   { timestamps: true },
 );
+musicSchema.pre("save", async function (next) {
+  if (!this.isModified("highQuality")) return next();
+  request.get(this.highQuality).on("response", (response) => {
+    if (200 == response.statusCode) {
+      s3.upload(
+        {
+          Body: response,
+          Bucket: "musics",
+          ACL: "public-read",
+          CacheControl: "5184000",
+          Key: `${Date.now().toString()}.mp3`,
+        },
+        (err, data) => {
+          this.highQuality = data.Location;
+          next();
+        },
+      );
+    } else {
+      throw new Error("url is not valid");
+    }
+  });
+});
 exports.Schema = musicSchema;
 exports.joiSchema = Joi.object({
   _id: Joi.objectId(),

@@ -27,30 +27,3 @@ exports.setUrl = (fieldName) => (req, res, next) => {
   req.body[fieldName] = req.file.location;
   next();
 };
-exports.musicUpload = (field) => {
-  return (req, res, next) => {
-    if (req.body[field]) {
-      request.get(url).on("response", function (response) {
-        if (200 == response.statusCode) {
-          s3.upload(
-            {
-              Body: response,
-              Bucket: "musics",
-              ACL: "public-read",
-              CacheControl: "5184000",
-              Key: `${Date.now().toString()}.mp3`,
-            },
-            function (err, data) {
-              req.body.highQuality = data.Location;
-              next();
-            },
-          );
-        } else {
-          throw new Error("url is not valid");
-        }
-      });
-    } else {
-      next();
-    }
-  };
-};
