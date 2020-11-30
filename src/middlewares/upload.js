@@ -27,40 +27,39 @@ exports.setUrl = (fieldName) => (req, res, next) => {
   req.body[fieldName] = req.file.location;
   next();
 };
-exports.musicUplaod = (req, res, next) => {
-  if (req.body.highQuality)
-    request.get(url).on("response", function (response) {
-      if (200 == response.statusCode) {
-        s3.upload(
-          {
-            Body: response,
-            Bucket: "musics",
-            ACL: "public-read",
-            CacheControl: "5184000",
-            Key: `${Date.now().toString()}.mp3`,
-          },
-          function (err, data) {
-            req.body.highQuality = data.Location;
-          },
-        );
-      }
-    });
-  if (req.body.mediumQuality)
-    request.get(url).on("response", function (response) {
-      if (200 == response.statusCode) {
-        s3.upload(
-          {
-            Body: response,
-            Bucket: "musics",
-            ACL: "public-read",
-            CacheControl: "5184000",
-            Key: `${Date.now().toString()}.mp3`,
-          },
-          function (err, data) {
-            req.body.mediumQuality = data.Location;
-          },
-        );
-      }
-    });
+exports.musicUpload = async (req, res, next) => {
+  if (req.body.highQuality) {
+    const highQualityData = await streamUploadToAws(req.body.highQuality);
+    req.body.highQuality = highQualityData.Location;
+  }
+  if (req.body.mediumQuality) {
+    const mediumQualityData = await streamUploadToAws(
+      req.body.mediumQualityData,
+    );
+    req.body.mediumQuality = mediumQualityData.Location;
+  }
   next();
 };
+function streamUploadToAws(url) {
+  return new Promise((resolve, reject) => {
+    request.get(url).on("response", function (response) {
+      if (200 == response.statusCode) {
+        s3.upload(
+          {
+            Body: response,
+            Bucket: "musics",
+            ACL: "public-read",
+            CacheControl: "5184000",
+            Key: `${Date.now().toString()}.mp3`,
+          },
+          function (err, data) {
+            resolve(data);
+            reject(err);
+          },
+        );
+      } else {
+        reject(new Error("url is not valid"));
+      }
+    });
+  });
+}
