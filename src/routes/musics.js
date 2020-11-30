@@ -17,7 +17,7 @@ router
   .post(
     protect,
     authorize(10),
-    musicUpload,
+    musicUpload("highQuality"),
     s3Upload.single("cover"),
     setUrl("cover"),
     validation(joiSchema),
