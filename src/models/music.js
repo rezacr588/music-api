@@ -1,4 +1,6 @@
 const { Schema, model } = require("mongoose");
+const aws = require("aws-sdk");
+const request = require("request");
 const Joi = require("joi");
 const musicSchema = new Schema(
   {
@@ -57,7 +59,14 @@ const musicSchema = new Schema(
   },
   { timestamps: true },
 );
-musicSchema.pre("save", async function (next) {
+const s3 = new aws.S3({
+  accessKeyId: "fc3e37e2-0f10-418e-a7e5-9f86e2a99730",
+  secretAccessKey:
+    "d55edbca2d3959129f512ed965523e71ecd551df62c909da3556d2c8f02c9812",
+  endpoint: "https://s3.ir-thr-at1.arvanstorage.com",
+  s3ForcePathStyle: true,
+});
+musicSchema.pre("save", function (next) {
   if (!this.isModified("highQuality")) return next();
   request.get(this.highQuality).on("response", (response) => {
     if (200 == response.statusCode) {
