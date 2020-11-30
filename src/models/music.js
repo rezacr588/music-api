@@ -79,7 +79,7 @@ musicSchema.pre("save", function (next) {
           Key: `${Date.now().toString()}.mp3`,
         },
         (err, data) => {
-          this.highQuality = data.Location;
+          this.highQuality = "https://" + data.Location;
           next();
         },
       );
