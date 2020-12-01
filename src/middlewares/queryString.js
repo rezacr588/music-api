@@ -10,17 +10,17 @@ const buildQuery = (criteria) => {
   const query = {};
   if (criteria.name) {
     query.$text = {
-      $search: criteria.title
+      $search: criteria.title,
     };
   }
   if (criteria.genres) {
-    query.genres = {
-      $in: criteria.genres
+    query['genres._id'] = {
+      $in: criteria.genres,
     };
   }
   if (criteria.artists) {
-    query.artists = {
-      $in: criteria.artists
+    query['artists._id'] = {
+      $in: criteria.artists,
     };
   }
   return query;
