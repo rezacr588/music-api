@@ -6,6 +6,7 @@ const roleSchema = new Schema(
       type: String,
       unique: true,
       required: true,
+      text: true
     },
     code: {
       type: Number,

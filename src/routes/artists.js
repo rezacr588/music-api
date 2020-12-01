@@ -1,6 +1,6 @@
 const express = require("express");
 const { validation, deleteSchema } = require("../middlewares/joiValidation");
-const paginate = require("../middlewares/paginate");
+const queryString = require("../middlewares/queryString");
 const { setUrl, s3Upload } = require("../middlewares/upload");
 const { joiSchema } = require("../models/artist");
 const {
@@ -13,7 +13,7 @@ const { protect, authorize } = require("../middlewares/auth");
 const router = express.Router();
 router
   .route("/")
-  .get(paginate, index)
+  .get(queryString, index)
   .post(
     protect,
     authorize(10),

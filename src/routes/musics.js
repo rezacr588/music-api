@@ -2,7 +2,7 @@ const express = require("express");
 const { validation, deleteSchema } = require("../middlewares/joiValidation");
 const { protect, authorize } = require("../middlewares/auth");
 const { setUrl, s3Upload, musicUpload } = require("../middlewares/upload");
-const paginate = require("../middlewares/paginate");
+const queryString = require("../middlewares/queryString");
 const { joiSchema } = require("../models/music");
 const {
   create,
@@ -13,7 +13,7 @@ const {
 const router = express.Router();
 router
   .route("/")
-  .get(paginate, index)
+  .get(queryString, index)
   .post(
     protect,
     authorize(10),
