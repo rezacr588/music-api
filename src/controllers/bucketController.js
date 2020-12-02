@@ -10,10 +10,13 @@ module.exports = {
     });
   },
   create(req, res) {
-    const bucketParams = {
+    const params = {
       Bucket: req.body.title,
+      CreateBucketConfiguration: {
+        LocationConstraint: 'ir-thr-at1',
+      },
     };
-    s3.createBucket(bucketParams, function (err, data) {
+    s3.createBucket(params, function (err, data) {
       if (err) {
         throw err;
       } else {
