@@ -13,7 +13,7 @@ module.exports = {
     const params = {
       Bucket: req.body.title,
       CreateBucketConfiguration: {
-        LocationConstraint: 'ir-thr-at1',
+        LocationConstraint: '',
       },
     };
     s3.createBucket(params, function (err, data) {
