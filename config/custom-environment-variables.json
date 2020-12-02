@@ -1,4 +1,7 @@
 {
   "jwtSecretKey": "JWT_SECRET_KEY",
-  "port": "PORT"
+  "port": "PORT",
+  "accessKeyId": "AWS_ACCESS_KEY_ID",
+  "secretAccessKey": "AWS_SECRET_ACCESS_KEY",
+  "endpoint": "AWS_ENDPOINT"
 }

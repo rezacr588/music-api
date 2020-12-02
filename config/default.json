@@ -1,5 +1,8 @@
 {
   "jwtSecretKey": "",
+  "accessKeyId": "",
+  "secretAccessKey": "",
+  "endpoint": "",
   "dbConfig": {
     "options": {
       "useNewUrlParser": true,

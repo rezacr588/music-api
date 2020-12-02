@@ -5,4 +5,5 @@ router.use('/genres', require('./genres'));
 router.use('/users', require('./users'));
 router.use('/roles', require('./roles'));
 router.use('/userrole', require('./hybrid/userRole'));
+router.use('/buckets', require('./buckets'));
 module.exports = router;
