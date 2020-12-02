@@ -2,6 +2,7 @@ const s3 = require('../../apps/aws');
 module.exports = {
   index(req, res) {
     s3.listBuckets(function (err, data) {
+      console.log(err, data);
       if (err) {
         res.json(err);
       } else {
@@ -17,6 +18,7 @@ module.exports = {
       },
     };
     s3.createBucket(params, function (err, data) {
+      console.log(err, data);
       if (err) {
         res.json(err);
       } else {
@@ -29,6 +31,7 @@ module.exports = {
       Bucket: req.body.title,
     };
     s3.deleteBucket(bucketParams, function (err, data) {
+      console.log(err, data);
       if (err) {
         res.json(err);
       } else {
