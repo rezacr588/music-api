@@ -5,6 +5,6 @@ const s3 = new aws.S3({
   secretAccessKey: config.get('secretAccessKey'),
   endpoint: config.get('endpoint'),
   s3ForcePathStyle: true,
-  region: '',
+  region: 'REGION',
 });
 module.exports = s3;
