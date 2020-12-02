@@ -3,7 +3,7 @@ module.exports = {
   index(req, res) {
     s3.listBuckets(function (err, data) {
       if (err) {
-        throw err;
+        res.json(err);
       } else {
         res.json(data);
       }
@@ -18,7 +18,7 @@ module.exports = {
     };
     s3.createBucket(params, function (err, data) {
       if (err) {
-        throw err;
+        res.json(err);
       } else {
         res.json(data);
       }
@@ -30,7 +30,7 @@ module.exports = {
     };
     s3.deleteBucket(bucketParams, function (err, data) {
       if (err) {
-        throw err;
+        res.json(err);
       } else {
         res.json(data);
       }
