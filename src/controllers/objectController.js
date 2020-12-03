@@ -1,5 +1,8 @@
 module.exports = {
   create(req, res) {
-    res.json({ message: 'File uploaded' });
+    console.log('====================================');
+    console.log(req.file);
+    console.log('====================================');
+    res.json(req.file);
   },
 };

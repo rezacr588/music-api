@@ -1,4 +1,5 @@
-const s3 = require('../../apps/aws');
+const AWS = require('aws-sdk');
+const s3 = new AWS.S3();
 module.exports = {
   index(req, res) {
     s3.listBuckets(function (err, data) {
