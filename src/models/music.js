@@ -1,7 +1,8 @@
 const { Schema, model } = require('mongoose');
 const request = require('request');
 const Joi = require('joi');
-const s3 = require('../../apps/aws');
+const AWS = require('aws-sdk');
+const s3 = new AWS.S3();
 const musicSchema = new Schema(
   {
     title: {
