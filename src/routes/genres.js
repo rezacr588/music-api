@@ -8,19 +8,19 @@ const {
   create,
   index,
   patch,
-  handleDelete
+  handleDelete,
 } = require('../controllers/genreController');
 const router = express.Router();
 router
   .route('/')
-  .get(queryString, index)
+  .get(protect, queryString, index)
   .post(
     protect,
     authorize(10),
     s3Upload.single('cover'),
     setUrl('cover'),
     validation(joiSchema),
-    create
+    create,
   )
   .patch(protect, authorize(10), validation(joiSchema), patch)
   .delete(protect, authorize(10), validation(deleteSchema), handleDelete);

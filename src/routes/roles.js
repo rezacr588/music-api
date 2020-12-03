@@ -7,14 +7,14 @@ const {
   create,
   index,
   patch,
-  handleDelete
+  handleDelete,
 } = require('../controllers/roleController');
 const router = express.Router();
 router.use(protect, authorize(10));
 router
   .route('/')
-  .get(queryString, index)
-  .post(validation(joiSchema), create)
-  .patch(validation(joiSchema), patch)
-  .delete(validation(deleteSchema), handleDelete);
+  .get(protect, authorize(10), queryString, index)
+  .post(protect, authorize(10), validation(joiSchema), create)
+  .patch(protect, authorize(10), validation(joiSchema), patch)
+  .delete(protect, authorize(10), validation(deleteSchema), handleDelete);
 module.exports = router;
