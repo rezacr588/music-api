@@ -35,5 +35,5 @@ exports.Upload = (req, res, next) => {
         cb(null, `${Date.now().toString()}${file.originalname}`);
       },
     }),
-  });
+  })('data');
 };
