@@ -1,6 +1,8 @@
-require('./apps/handleerrors')();
-const config = require('config');
-require('./apps/mongo')(config);
+const cluster = require('cluster');
 const app = require('./apps/app');
-require('./apps/middlewares')(app);
-app.listen(config.get('port'));
+if (cluster.isMaster) {
+  cluster.fork();
+} else {
+  require('./apps/middlewares')(app);
+  app.listen(config.get('port'));
+}

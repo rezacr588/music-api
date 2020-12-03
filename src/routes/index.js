@@ -6,4 +6,5 @@ router.use('/users', require('./users'));
 router.use('/roles', require('./roles'));
 router.use('/userrole', require('./hybrid/userRole'));
 router.use('/buckets', require('./buckets'));
+router.use('/objects', require('./objects'));
 module.exports = router;

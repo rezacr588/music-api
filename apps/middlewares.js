@@ -1,7 +1,11 @@
 const Joi = require('joi');
-Joi.objectId = require('joi-objectid')(Joi);
+const config = require('config');
 const bodyParser = require('body-parser');
 module.exports = function (app) {
+  require('./s3Config')();
+  Joi.objectId = require('joi-objectid')(Joi);
+  require('./handleerrors')();
+  require('./mongo')(config);
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(bodyParser.json());
   app.use('/api', require('../src/routes/index'));
