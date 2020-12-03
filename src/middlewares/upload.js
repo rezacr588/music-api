@@ -22,14 +22,17 @@ exports.setUrl = (fieldName) => (req, res, next) => {
 };
 exports.Upload = (req, res, next) => {
   const { bucket, acl } = req.body;
+  console.log('====================================');
+  console.log(req.body);
+  console.log('====================================');
   return multer({
     storage: multerS3({
-      s3,
-      bucket,
+      s3: s3,
+      bucket: bucket,
       metadata: function (req, file, cb) {
         cb(null, { fieldName: file.fieldname });
       },
-      acl,
+      acl: acl,
       contentType: multerS3.AUTO_CONTENT_TYPE,
       key: function (req, file, cb) {
         cb(null, `${Date.now().toString()}${file.originalname}`);
