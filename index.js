@@ -1,4 +1,5 @@
 const cluster = require('cluster');
+const config = require('config');
 const app = require('./apps/app');
 if (cluster.isMaster) {
   cluster.fork();
