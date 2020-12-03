@@ -20,20 +20,21 @@ exports.setUrl = (fieldName) => (req, res, next) => {
   req.body[fieldName] = req.file.location;
   next();
 };
-exports.Upload = (req, res, next) => {
-  const { bucket, acl } = req.params;
-  return multer({
-    storage: multerS3({
-      s3,
-      bucket,
-      metadata: function (req, file, cb) {
-        cb(null, { fieldName: file.fieldname });
-      },
-      acl,
-      contentType: multerS3.AUTO_CONTENT_TYPE,
-      key: function (req, file, cb) {
-        cb(null, `${Date.now().toString()}${file.originalname}`);
-      },
-    }),
-  }).single('data');
-};
+exports.Upload = multer({
+  storage: multerS3({
+    s3,
+    bucket: function (req, file, cb) {
+      cb(null, req.params.bucket);
+    },
+    metadata: function (req, file, cb) {
+      cb(null, { fieldName: file.fieldname });
+    },
+    acl: function (req, file, cb) {
+      cb(null, req.params.acl);
+    },
+    contentType: multerS3.AUTO_CONTENT_TYPE,
+    key: function (req, file, cb) {
+      cb(null, `${Date.now().toString()}${file.originalname}`);
+    },
+  }),
+});
