@@ -79,10 +79,7 @@ musicSchema.pre('save', function (next) {
         },
       );
     } else {
-      next();
-      console.log('====================================');
-      console.log(new Error('url is not valid'));
-      console.log('====================================');
+      next(new Error('url is not valid'));
     }
   });
 });
@@ -104,10 +101,7 @@ musicSchema.pre('save', function (next) {
         },
       );
     } else {
-      next();
-      console.log('====================================');
-      console.log(new Error('url is not valid'));
-      console.log('====================================');
+      next(new Error('url is not valid'));
     }
   });
 });
@@ -129,10 +123,7 @@ musicSchema.pre('save', function (next) {
         },
       );
     } else {
-      next();
-      console.log('====================================');
-      console.log(new Error('url is not valid'));
-      console.log('====================================');
+      next(new Error('url is not valid'));
     }
   });
 });

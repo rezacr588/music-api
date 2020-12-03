@@ -1,7 +1,11 @@
 const Joi = require('joi');
 const config = require('config');
 const bodyParser = require('body-parser');
+const redis = require('./redis');
 module.exports = function (app) {
+  redis.on('ready', () => {
+    console.log('redis is ready');
+  });
   require('./s3Configs')();
   Joi.objectId = require('joi-objectid')(Joi);
   require('./handleerrors')();
