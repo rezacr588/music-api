@@ -21,10 +21,7 @@ exports.setUrl = (fieldName) => (req, res, next) => {
   next();
 };
 exports.Upload = (req, res, next) => {
-  const { bucket, acl } = req.body;
-  console.log('====================================');
-  console.log(req.body);
-  console.log('====================================');
+  const { bucket, acl } = req.params;
   return multer({
     storage: multerS3({
       s3: s3,
