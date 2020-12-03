@@ -2,7 +2,7 @@ const Joi = require('joi');
 const config = require('config');
 const bodyParser = require('body-parser');
 module.exports = function (app) {
-  require('./s3Config')();
+  require('./s3Configs')();
   Joi.objectId = require('joi-objectid')(Joi);
   require('./handleerrors')();
   require('./mongo')(config);
