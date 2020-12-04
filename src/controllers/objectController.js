@@ -5,7 +5,8 @@ module.exports = {
   },
   async redirect(req, res) {
     const { bucket, filename, id } = req.params;
-    await redis.lpush(`users:` + req.user._id, id);
+    const result = await redis.lpush(`users:` + req.user._id, id);
+    console.log(result);
     const redirectedUrl = `https://${bucket}.s3.ir-thr-at1.arvanstorage.com/${filename}`;
     res.redirect(redirectedUrl);
   },
