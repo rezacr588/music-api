@@ -10,5 +10,5 @@ router.post(
   Upload.single('data'),
   create,
 );
-router.get('/:bucket/:filename', protect, redirect);
+router.get('/:bucket/:filename/:id', protect, redirect);
 module.exports = router;

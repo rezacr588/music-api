@@ -1,10 +1,12 @@
-const config = require('config');
+const redis = require('../../apps/redis');
 module.exports = {
   create(req, res) {
     res.json(req.file);
   },
-  redirect(req, res) {
-    const redirectedUrl = `https://${req.params.bucket}.s3.ir-thr-at1.arvanstorage.com/${req.params.filename}`;
+  async redirect(req, res) {
+    const { bucket, filename, id } = req.params;
+    await redis.lpush(`users:` + req.user._id, id);
+    const redirectedUrl = `https://${bucket}.s3.ir-thr-at1.arvanstorage.com/${filename}`;
     res.redirect(redirectedUrl);
   },
 };
