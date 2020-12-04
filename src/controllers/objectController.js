@@ -1,8 +1,10 @@
+const config = require('config');
 module.exports = {
   create(req, res) {
-    console.log('====================================');
-    console.log(req.file);
-    console.log('====================================');
     res.json(req.file);
+  },
+  redirect(req, res) {
+    const redirectedUrl = `https://${req.params.bucket}.s3.ir-thr-at1.arvanstorage.com/${req.params.filename}`;
+    res.redirect(redirectedUrl);
   },
 };
