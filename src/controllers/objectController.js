@@ -10,7 +10,7 @@ module.exports = {
     let objects = await s3.listObjectsV2({
       Bucket: req.params.bucket
     });
-    objects = data.Contents.map(obj => obj);
+    objects = objects.Contents.map(obj => obj);
     console.log('====================================');
     console.log(objects);
     console.log('====================================');
