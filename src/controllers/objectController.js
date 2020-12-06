@@ -7,9 +7,9 @@ module.exports = {
     res.json(req.file);
   },
   async index(req, res) {
-    let objects = await s3.listObjectsV2({
+    let objects = await s3.listObjects({
       Bucket: req.params.bucket
-    });
+    }).promise();
     console.log('====================================');
     console.log(objects);
     console.log('====================================');
