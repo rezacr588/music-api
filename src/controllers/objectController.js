@@ -10,6 +10,9 @@ module.exports = {
     const objects = await s3.listObjectsV2({
       Bucket: req.params.bucket
     });
+    console.log('====================================');
+    console.log(objects);
+    console.log('====================================');
     res.json(objects);
   },
   async redirect(req, res) {
