@@ -6,13 +6,15 @@ module.exports = {
   create(req, res) {
     res.json(req.file);
   },
+  remove(req, res) {
+    const { bucket, key } = req.params;
+    const result = s3.deleteObject({ Bucket: bucket, Key: key }).promise();
+    res.json(result);
+  },
   async index(req, res) {
     let objects = await s3.listObjects({
       Bucket: req.params.bucket
     }).promise();
-    console.log('====================================');
-    console.log(objects);
-    console.log('====================================');
     objects = objects.Contents.map(obj => obj);
     res.json(objects);
   },
